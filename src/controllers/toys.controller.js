@@ -1,23 +1,28 @@
+const ToysService = require("../services/toys.service")
+
+const toysService = new ToysService();
 
 const getToys = (req, res)=>{
-    res.send({status:'success', message:'getting all toys'})
+    res.send({status:'success', message:'getting all toys', payload:toysService.getAll()})
 }
 
 const getToyById = (req, res)=>{
-    //TODO get toy by id
-    res.send({status:'success', message:'getting one toy'})
+    const {id} = req.params; 
+    res.send({status:'success', message:'getting one toy', payload: toysService.getById(id)})
 }
 
 const createToy = (req, res)=>{
-    res.send({status:'success', message:'creating a toy'})
+    res.send({status:'success', message:'creating a toy', payload: toysService.create(req.body)})
 }
 
 const updateToy = (req, res)=>{
-    res.send({status:'success', message:'updating a toy'})
+    const {id} = req.params; 
+    res.send({status:'success', message:'updating a toy', payload: toysService.update(id, req.body) })
 }
 
 const deleteToy = (req, res)=>{
-    res.send({status:'success', message:'deleting a toy'})
+    const { id } = req.params;
+    res.send({status:'success', message:'deleting a toy', payload: toysService.delete(id) })
 }
 
 
